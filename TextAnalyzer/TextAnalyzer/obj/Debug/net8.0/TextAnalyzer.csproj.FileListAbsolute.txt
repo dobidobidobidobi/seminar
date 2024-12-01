@@ -1,0 +1,14 @@
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\obj\Debug\net8.0\TextAnalyzer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\obj\Debug\net8.0\TextAnalyzer.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\obj\Debug\net8.0\TextAnalyzer.AssemblyInfo.cs
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\obj\Debug\net8.0\TextAnalyzer.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\bin\Debug\net8.0\TextAnalyzer.exe
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\bin\Debug\net8.0\TextAnalyzer.deps.json
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\bin\Debug\net8.0\TextAnalyzer.runtimeconfig.json
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\bin\Debug\net8.0\TextAnalyzer.dll
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\bin\Debug\net8.0\TextAnalyzer.pdb
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\obj\Debug\net8.0\TextAnalyzer.dll
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\obj\Debug\net8.0\refint\TextAnalyzer.dll
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\obj\Debug\net8.0\TextAnalyzer.pdb
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\obj\Debug\net8.0\TextAnalyzer.genruntimeconfig.cache
+C:\Users\Admin\source\repos\TextAnalyzer\TextAnalyzer\obj\Debug\net8.0\ref\TextAnalyzer.dll
