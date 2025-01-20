@@ -8,4 +8,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\brush.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\brush.png" />
+  </ItemGroup>
+
 </Project>

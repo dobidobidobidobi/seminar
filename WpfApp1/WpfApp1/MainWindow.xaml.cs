@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,96 +16,107 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool isDrawing;
+        private bool leftWhileDrawing;
+        private Polyline currentLine;
+
         public MainWindow()
         {
             InitializeComponent();
         }
-        private string RgbToHex(int r, int g, int b)
+
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            return $"#{r:X2}{g:X2}{b:X2}";
-        }
-        private void DrawColor()
-        {
-            if (RedSlider == null || GreenSlider == null || BlueSlider == null)
+            if (e.ButtonState == MouseButtonState.Pressed)
             {
-                return;
-            }
-            int r = (int)(RedSlider.Value);
-            int g = (int)(GreenSlider.Value);
-            int b = (int)(BlueSlider.Value);
-            string hex = RgbToHex(r, g, b);
-            if (HexTextBlock != null) { HexTextBlock.Text = hex; }
-            Result.Fill = (Brush)(new BrushConverter().ConvertFromString(hex));
-
-        }
-
-        private void RedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            RedBox.Text = RedSlider.Value.ToString();
-            DrawColor();
-
-        }
-
-        private void GreenSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            GreenBox.Text = GreenSlider.Value.ToString();
-            DrawColor();
-        }
-
-        private void BlueSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            BlueBox.Text = BlueSlider.Value.ToString();
-            DrawColor();
-        }
-
-        private void RedBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (RedBox.Text != "")
-            {
-                int value = int.Parse(RedBox.Text);
-                value = ChangeToLegalValue(value);
-                RedBox.Text = value.ToString();
-                if (RedSlider != null) { RedSlider.Value = value; }
+                isDrawing = true;
+                currentLine = new Polyline
+                {
+                    Stroke = ButtonColor.Background,
+                    StrokeThickness = (int)(BrushSize.Value)
+                };
+                drawingCanvas.Children.Add(currentLine);
+                currentLine.Points.Add(e.GetPosition(drawingCanvas));
             }
         }
 
-        private void GreenBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (GreenBox.Text != "") 
+            if (isDrawing)
             {
-                int value = int.Parse(GreenBox.Text);
-                value = ChangeToLegalValue(value);
-                GreenBox.Text = value.ToString();
-                if (GreenSlider != null) { GreenSlider.Value = value; }  
-            }          
-        }
-
-        private void BlueBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (BlueBox.Text != "") 
-            {
-               int value = int.Parse(BlueBox.Text);
-               value = ChangeToLegalValue(value);
-               BlueBox.Text = value.ToString();
-               if (BlueSlider != null) { BlueSlider.Value = value; }
+                currentLine.Points.Add(e.GetPosition(drawingCanvas));
             }
         }
 
-        private int ChangeToLegalValue(int value)
+        private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (value <= 0) return 0;
-            if (value > 255) return 255;
-            return value;
-        }
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            if (regex.IsMatch(e.Text))
+            if (isDrawing)
             {
-                e.Handled = true;
-                MessageBox.Show("Zadávejte pouze hodnoty 0-255");
+                isDrawing = false;
             }
         }
 
+        private void ButtonColor_Click(object sender, RoutedEventArgs e)
+        {
+            RGBPicker rgbPicker = new RGBPicker();
+            rgbPicker.ShowDialog();
+            ButtonColor.Background = rgbPicker.Result.Fill;
+        }
+
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.FileName = "Document"; // Default file name
+            dialog.DefaultExt = ".txt"; // Default file extension
+            dialog.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dialog.FileName;
+            }
+        }
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure save file dialog box
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+            dialog.FileName = "Document"; // Default file name
+            dialog.DefaultExt = ".txt"; // Default file extension
+            dialog.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show save file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Save document
+                string filename = dialog.FileName;
+            }
+        }
+
+        private void Canvas_MouseEnter(object sender, MouseEventArgs e)
+        {
+                if (Mouse.LeftButton == MouseButtonState.Pressed)
+                {
+                    isDrawing = true;
+                    currentLine = new Polyline
+                    {
+                        Stroke = ButtonColor.Background,
+                        StrokeThickness = (int)(BrushSize.Value)
+                    };
+                    drawingCanvas.Children.Add(currentLine);
+                    currentLine.Points.Add(e.GetPosition(drawingCanvas));
+                }   
+        }
+
+        private void Canvas_MouseLeave(object sender, MouseEventArgs e)
+        {
+            isDrawing = false;
+        }
     }
 }

@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:WpfApp1"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <BitmapImage x:Key="BrushImage" UriSource="Assets/brush.png"/>
     </Application.Resources>
 </Application>
