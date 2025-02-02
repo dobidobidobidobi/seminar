@@ -12,12 +12,20 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
- 
-        <Grid Grid.Row="1">
-            <UniformGrid Rows="40" Columns="50" x:Name="MineField">
 
+        <Canvas Grid.Row="1" ClipToBounds="True">
+            <UniformGrid Rows="40" Columns="50" x:Name="MineField" Background="Black"
+                         Width="2500" Height="2000"
+                         MouseRightButtonUp="MineField_MouseRightButtonUp"
+                         MouseRightButtonDown="MineField_MouseRightButtonDown"
+                         MouseMove="MineField_MouseMove"
+                         Canvas.Bottom="-200" 
+                         Canvas.Right="-500">
+            
             </UniformGrid>
-        </Grid>
+        </Canvas> 
+            
+        
 
     </Grid>
 </Window>

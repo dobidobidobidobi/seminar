@@ -17,15 +17,22 @@ namespace Minesweeper
     public partial class MainWindow : Window
     {
         private Square[,] squares;
-        private Image[,] textures;
-        private Border[,] borders;
+        
+        private Viewbox[,] viewboxes;
 
-
+        private TextBlock[] nearbyNumbers;
+        private bool isDragging = false;
+        private Point initialMousePosition;
+        private double InitialCanvasRight;
+        private double InitialCanvasBottom;
         public MainWindow()
         {
             InitializeComponent();
             CreateGrid(MineField.Rows, MineField.Columns);
             InitializeMineField();
+            CreateNearbyNumbers();
+            viewboxes[0, 12].Child = nearbyNumbers[0];
+
         }
 
         private void CreateGrid(int rows, int columns)
@@ -43,22 +50,22 @@ namespace Minesweeper
 
         private void InitializeMineField()
         {
-            textures = new Image[MineField.Rows, MineField.Columns];
-            borders = new Border[MineField.Rows, MineField.Columns];
+            
+            viewboxes = new Viewbox[MineField.Rows, MineField.Columns];
             for (int i = 0; i < MineField.Rows; i++)
             {
                 for (int j = 0; j < MineField.Columns; j++)
                 {
+                    Viewbox viewbox = new Viewbox();
                     Border border = new Border
                     {
-                        Background = Brushes.LightGray, 
-                        BorderBrush = Brushes.Black, 
-                        BorderThickness = new Thickness(1) 
+                        Background = new SolidColorBrush((Color) ColorConverter.ConvertFromString("#3b3b3b")), 
+                        BorderBrush = Brushes.Black,
+                        Margin = new Thickness(0.5),
+                        BorderThickness = new Thickness(0),
+                        Child = viewbox
                     };
-                    Image texture = new Image();
-                    textures[i,j] = texture;
-                    border.Child = texture;
-                    borders[i, j] = border;
+                    viewboxes[i, j] = viewbox;
 
 
                     MineField.Children.Add(border);
@@ -66,5 +73,51 @@ namespace Minesweeper
             }
         }
 
+        private void CreateNearbyNumbers()
+        {
+            nearbyNumbers = new TextBlock[9];
+            for (var i = 0; i < 9 ;i++)
+            {
+                TextBlock JoeBiden = new TextBlock
+                {
+                    Text = Convert.ToString(i + 1),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#009200")),
+                    FontFamily = new FontFamily("Tahoma"),
+                    FontWeight = FontWeights.Bold,
+                    TextAlignment = TextAlignment.Center
+                };
+                nearbyNumbers[i] = JoeBiden;
+            }
+        }
+
+        private void MineField_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            isDragging = false;
+            MineField.ReleaseMouseCapture();
+        }
+
+        private void MineField_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            initialMousePosition = e.GetPosition(this);
+            isDragging = true;
+            InitialCanvasBottom = Canvas.GetBottom(MineField);
+            InitialCanvasRight = Canvas.GetRight(MineField);
+            MineField.CaptureMouse();
+        }
+
+        private void MineField_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDragging)
+            {
+                Point currentMousePosition = e.GetPosition(this);
+                double offsetX = currentMousePosition.X - initialMousePosition.X;
+                double offsetY = currentMousePosition.Y - initialMousePosition.Y;
+
+                Canvas.SetRight(MineField, offsetX/2 + InitialCanvasRight);
+                Canvas.SetBottom(MineField, offsetY/2 + InitialCanvasBottom);
+            }
+        }
     }
 }
