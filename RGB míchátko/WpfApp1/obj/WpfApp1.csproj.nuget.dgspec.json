@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jakdo\\source\\repos\\WpfApp1\\WpfApp1\\WpfApp1.csproj": {}
+    "C:\\program1\\seminar\\RGB míchátko\\WpfApp1\\WpfApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jakdo\\source\\repos\\WpfApp1\\WpfApp1\\WpfApp1.csproj": {
+    "C:\\program1\\seminar\\RGB míchátko\\WpfApp1\\WpfApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jakdo\\source\\repos\\WpfApp1\\WpfApp1\\WpfApp1.csproj",
+        "projectUniqueName": "C:\\program1\\seminar\\RGB míchátko\\WpfApp1\\WpfApp1.csproj",
         "projectName": "WpfApp1",
-        "projectPath": "C:\\Users\\jakdo\\source\\repos\\WpfApp1\\WpfApp1\\WpfApp1.csproj",
-        "packagesPath": "C:\\Users\\jakdo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jakdo\\source\\repos\\WpfApp1\\WpfApp1\\obj\\",
+        "projectPath": "C:\\program1\\seminar\\RGB míchátko\\WpfApp1\\WpfApp1.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\program1\\seminar\\RGB míchátko\\WpfApp1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\jakdo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -42,7 +42,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -68,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

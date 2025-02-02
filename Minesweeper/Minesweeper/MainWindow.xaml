@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="870" Width="1000">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="CanResize"
+        Title="MainWindow" Height="870" Width="1000"
+        SizeChanged="Window_SizeChanged" MouseWheel="Window_MouseWheel">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -14,15 +15,17 @@
 
 
         <Canvas Grid.Row="1" ClipToBounds="True">
-            <UniformGrid Rows="40" Columns="50" x:Name="MineField" Background="Black"
+            <Viewbox>
+                <UniformGrid Rows="40" Columns="50" x:Name="MineField" Background="Black"
                          Width="2500" Height="2000"
                          MouseRightButtonUp="MineField_MouseRightButtonUp"
                          MouseRightButtonDown="MineField_MouseRightButtonDown"
                          MouseMove="MineField_MouseMove"
-                         Canvas.Bottom="-200" 
-                         Canvas.Right="-500">
+                         Canvas.Bottom="-600" 
+                         Canvas.Right="-750">
             
-            </UniformGrid>
+                </UniformGrid>
+            </Viewbox>
         </Canvas> 
             
         

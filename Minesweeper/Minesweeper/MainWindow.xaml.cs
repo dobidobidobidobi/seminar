@@ -17,14 +17,15 @@ namespace Minesweeper
     public partial class MainWindow : Window
     {
         private Square[,] squares;
-        
-        private Viewbox[,] viewboxes;
 
+        private Viewbox[,] viewboxes;
+        private bool ZoomCreated = false;
         private TextBlock[] nearbyNumbers;
         private bool isDragging = false;
         private Point initialMousePosition;
         private double InitialCanvasRight;
         private double InitialCanvasBottom;
+        private double zoomScale = 1.0;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +33,8 @@ namespace Minesweeper
             InitializeMineField();
             CreateNearbyNumbers();
             viewboxes[0, 12].Child = nearbyNumbers[0];
-
+            
+         
         }
 
         private void CreateGrid(int rows, int columns)
@@ -50,7 +52,6 @@ namespace Minesweeper
 
         private void InitializeMineField()
         {
-            
             viewboxes = new Viewbox[MineField.Rows, MineField.Columns];
             for (int i = 0; i < MineField.Rows; i++)
             {
@@ -59,14 +60,13 @@ namespace Minesweeper
                     Viewbox viewbox = new Viewbox();
                     Border border = new Border
                     {
-                        Background = new SolidColorBrush((Color) ColorConverter.ConvertFromString("#3b3b3b")), 
+                        Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3b3b3b")),
                         BorderBrush = Brushes.Black,
                         Margin = new Thickness(0.5),
                         BorderThickness = new Thickness(0),
                         Child = viewbox
                     };
                     viewboxes[i, j] = viewbox;
-
 
                     MineField.Children.Add(border);
                 }
@@ -76,7 +76,7 @@ namespace Minesweeper
         private void CreateNearbyNumbers()
         {
             nearbyNumbers = new TextBlock[9];
-            for (var i = 0; i < 9 ;i++)
+            for (var i = 0; i < 9; i++)
             {
                 TextBlock JoeBiden = new TextBlock
                 {
@@ -112,12 +112,90 @@ namespace Minesweeper
             if (isDragging)
             {
                 Point currentMousePosition = e.GetPosition(this);
-                double offsetX = currentMousePosition.X - initialMousePosition.X;
-                double offsetY = currentMousePosition.Y - initialMousePosition.Y;
+                double offsetX = (currentMousePosition.X - initialMousePosition.X) / zoomScale;
+                double offsetY = (currentMousePosition.Y - initialMousePosition.Y) / zoomScale;
 
-                Canvas.SetRight(MineField, offsetX/2 + InitialCanvasRight);
-                Canvas.SetBottom(MineField, offsetY/2 + InitialCanvasBottom);
+                if ((-offsetX / 2 + InitialCanvasRight >= -MineField.Width * zoomScale + ActualWidth - 14) &&
+                    (-offsetX / 2 + InitialCanvasRight <= 0))
+                {
+                    Canvas.SetRight(MineField, -offsetX / 2 + InitialCanvasRight);
+                }
+                if ((-offsetY / 2 + InitialCanvasBottom >= -MineField.Height * zoomScale + ActualHeight - 110) &&
+                    (-offsetY / 2 + InitialCanvasBottom <= 0))
+                {
+                    Canvas.SetBottom(MineField, -offsetY / 2 + InitialCanvasBottom);
+                }
             }
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double bottom = Canvas.GetBottom(MineField);
+            double right = Canvas.GetRight(MineField);
+
+            CalculateMinZoomScale();
+            if (zoomScale < MinZoomScale)
+            {
+                zoomScale = MinZoomScale;
+            }
+
+            zoomScale = 1.0;
+            ApplyZoom();
+
+            if (bottom < -MineField.Height * zoomScale + ActualHeight - 110)
+            {
+                Canvas.SetBottom(MineField, -MineField.Height * zoomScale + ActualHeight - 110);
+            }
+            if (right < -MineField.Width * zoomScale + ActualWidth - 14)
+            {
+                Canvas.SetRight(MineField, -MineField.Width * zoomScale + ActualWidth - 14);
+            }
+            
+
+        }
+        
+        private double MaxZoomScale = 2.0;
+        private double MinZoomScale = 0.4;
+
+        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            CalculateMinZoomScale();
+
+            if (e.Delta > 0 && zoomScale < MaxZoomScale)
+            {
+                zoomScale += (1 - MinZoomScale) / 8;
+            }
+            else if (e.Delta < 0 && zoomScale >= MinZoomScale + ((1 - MinZoomScale) / 8))
+            {
+            zoomScale -= (1 - MinZoomScale) / 8;
+            }
+
+            ApplyZoom();
+        }
+
+        private void ApplyZoom()
+        {
+            MineField.LayoutTransform = new ScaleTransform(zoomScale, zoomScale);
+
+            double bottom = Canvas.GetBottom(MineField);
+            double right = Canvas.GetRight(MineField);
+
+            if (bottom < -MineField.Height * zoomScale + ActualHeight - 110)
+            {
+                Canvas.SetBottom(MineField, -MineField.Height * zoomScale + ActualHeight - 110);
+            }
+            if (right < -MineField.Width * zoomScale + ActualWidth - 14)
+            {
+                Canvas.SetRight(MineField, -MineField.Width * zoomScale + ActualWidth - 14);
+            }
+        }
+
+        private void CalculateMinZoomScale()
+        {
+            double widthScale = (ActualWidth-14)  / MineField.Width;
+            double heightScale = (ActualHeight -110) / MineField.Height;
+            MinZoomScale = Math.Max(widthScale, heightScale);
+            MaxZoomScale = MinZoomScale * 4;
         }
     }
 }
