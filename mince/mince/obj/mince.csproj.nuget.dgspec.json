@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\source\\repos\\mince\\mince\\mince.csproj": {}
+    "C:\\program1\\seminar\\mince\\mince\\mince.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\source\\repos\\mince\\mince\\mince.csproj": {
+    "C:\\program1\\seminar\\mince\\mince\\mince.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\mince\\mince\\mince.csproj",
+        "projectUniqueName": "C:\\program1\\seminar\\mince\\mince\\mince.csproj",
         "projectName": "mince",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\mince\\mince\\mince.csproj",
+        "projectPath": "C:\\program1\\seminar\\mince\\mince\\mince.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\mince\\mince\\obj\\",
+        "outputPath": "C:\\program1\\seminar\\mince\\mince\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

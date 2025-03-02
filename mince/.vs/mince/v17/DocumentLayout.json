@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Admin\\source\\repos\\mince\\",
+  "WorkspaceRootPath": "C:\\program1\\seminar\\mince\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9BB887E8-3746-4AA0-9082-ED5A1DDCA417}|mince\\mince.csproj|c:\\users\\admin\\source\\repos\\mince\\mince\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9BB887E8-3746-4AA0-9082-ED5A1DDCA417}|mince\\mince.csproj|c:\\program1\\seminar\\mince\\mince\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9BB887E8-3746-4AA0-9082-ED5A1DDCA417}|mince\\mince.csproj|solutionrelative:mince\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -32,11 +32,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\mince\\mince\\Program.cs",
+              "DocumentMoniker": "C:\\program1\\seminar\\mince\\mince\\Program.cs",
               "RelativeDocumentMoniker": "mince\\Program.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\mince\\mince\\Program.cs",
+              "ToolTip": "C:\\program1\\seminar\\mince\\mince\\Program.cs",
               "RelativeToolTip": "mince\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAABIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-02T11:43:21.277Z",
               "EditorCaption": ""

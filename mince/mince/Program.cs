@@ -7,14 +7,10 @@
         {
             coinTypes = Console.ReadLine().Split().Select(int.Parse).ToArray();
             int Sum = int.Parse(Console.ReadLine());
-
-
-
             List<int> combination = new List<int>();
 
             Backtrack(Sum, 0, combination);
         }
-
 
         static void Backtrack(int remaining, int start, List<int> combination)
         {
